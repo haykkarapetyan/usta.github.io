@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Torino Trip — April 2026</title>
+  <meta name="description" content="3-day trip to Torino, Italy — interactive map & itinerary">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Favicon (Italian flag emoji) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇹</text></svg>">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <h1>Torino 🇮🇹</h1>
+    <p class="subtitle">3 days in the heart of Piemonte</p>
+    <div class="dates">📅 April 19 – 21, 2026</div>
+  </header>
+
+  <!-- ===== Interactive Map ===== -->
+  <section class="map-section">
+    <div id="map"></div>
+    <div class="map-legend">
+      <div class="legend-item"><span class="legend-dot hotel"></span> Hotel</div>
+      <div class="legend-item"><span class="legend-dot activity"></span> Activity</div>
+      <div class="legend-item"><span class="legend-dot food"></span> Food</div>
+      <div class="legend-item"><span class="legend-dot viewpoint"></span> Viewpoint</div>
+    </div>
+  </section>
+
+  <!-- ===== Hotel Banner ===== -->
+  <div class="hotel-banner">
+    <div class="hotel-card">
+      <div class="hotel-icon">🏨</div>
+      <div class="hotel-info">
+        <h3>Your Hotel</h3>
+        <p>Via Cernaia 46, Turin — near Porta Susa station</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Day Tabs ===== -->
+  <nav class="tabs-container">
+    <div class="tabs">
+      <button class="tab active" data-day="day-1">📅 Day 1 — Apr 19</button>
+      <button class="tab" data-day="day-2">📅 Day 2 — Apr 20</button>
+      <button class="tab" data-day="day-3">📅 Day 3 — Apr 21</button>
+    </div>
+  </nav>
+
+  <!-- ===== Timeline ===== -->
+  <main class="timeline-section">
+
+    <!-- Day 1 -->
+    <div class="day-panel active" id="day-1">
+      <div class="day-header">
+        <h2>Day 1 — Arrival & Juve</h2>
+        <p>Evening arrival, city walk, and live football</p>
+      </div>
+      <div class="timeline"></div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-panel" id="day-2">
+      <div class="day-header">
+        <h2>Day 2 — Explore Torino</h2>
+        <p>Stadium tour, iconic landmarks, and sunset views</p>
+      </div>
+      <div class="timeline"></div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-panel" id="day-3">
+      <div class="day-header">
+        <h2>Day 3 — Arrivederci</h2>
+        <p>Morning coffee and departure</p>
+      </div>
+      <div class="timeline"></div>
+    </div>
+
+  </main>
+
+  <!-- ===== Budget Estimate ===== -->
+  <section class="budget-section">
+    <h2>Budget Estimate</h2>
+    <div class="budget-grid">
+      <div class="budget-card">
+        <div class="budget-icon">🏨</div>
+        <div class="budget-label">Hotel (2 nights)</div>
+        <div class="budget-value">~€150</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">⚽</div>
+        <div class="budget-label">Match Ticket</div>
+        <div class="budget-value">~€80</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">🎟️</div>
+        <div class="budget-label">Stadium Tour</div>
+        <div class="budget-value">~€25</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">🏛️</div>
+        <div class="budget-label">Mole Antonelliana</div>
+        <div class="budget-value">~€15</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">🍝</div>
+        <div class="budget-label">Food & Drinks</div>
+        <div class="budget-value">~€120</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-icon">🚌</div>
+        <div class="budget-label">Transport</div>
+        <div class="budget-value">~€30</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    Made with ☕ for Torino 2026
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+  <!-- App Logic -->
+  <script src="script.js"></script>
+
+</body>
+</html>
