@@ -215,14 +215,14 @@ const days = [
         time: '10:30',
         title: 'Head to FlixBus Stop',
         location: locations.vittorioEmanuele,
-        desc: 'Pick up luggage from hotel, walk to Vittorio Emanuele FlixBus stop.',
+        desc: 'Pick up luggage from hotel, walk to Vittorio Emanuele FlixBus stop. Arman departs separately from Torino.',
         type: 'transport'
       },
       {
         time: '11:15',
         title: 'FlixBus to Malpensa',
         location: locations.vittorioEmanuele,
-        desc: 'Bus 467: Turin (Vittorio Emanuele) → Malpensa Terminal 2. Arrive ~13:10.',
+        desc: 'Bus 467: Turin → Malpensa T2. Arrive ~13:10. (Hayk, Hovhannes & Sergey)',
         type: 'transport'
       },
       {
