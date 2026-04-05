@@ -386,7 +386,8 @@ Object.entries(locations).forEach(([key, loc]) => {
     distInfo = `<br><span style="color:#6e6e73;font-size:0.78rem">📍 ${formatDistance(dist)} from ${refName}</span>`;
   }
 
-  marker.bindPopup(`<strong>${loc.emoji} ${loc.name}</strong><br>${loc.desc}${distInfo}`);
+  const popupMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${loc.coords[0]},${loc.coords[1]}`;
+  marker.bindPopup(`<strong>${loc.emoji} ${loc.name}</strong><br>${loc.desc}${distInfo}<br><a href="${popupMapsUrl}" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;padding:4px 10px;background:#0071e3;color:#fff;border-radius:6px;font-size:0.78rem;text-decoration:none">🧭 Navigate</a>`);
   markers[key] = marker;
 });
 
@@ -510,13 +511,17 @@ days.forEach(day => {
     el.className = 'timeline-item';
     el.dataset.type = item.type;
     el.dataset.locationKey = locKey;
+    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${item.location.coords[0]},${item.location.coords[1]}`;
     el.innerHTML = `
       <div class="timeline-card">
         <div class="time">${item.time}</div>
         <div class="title">${item.location.emoji} ${item.title}</div>
         <div class="location">📍 ${item.location.name}</div>
         <div class="desc">${item.desc}</div>
-        ${distBadge}
+        <div class="card-actions">
+          ${distBadge}
+          <a href="${mapsUrl}" target="_blank" rel="noopener" class="nav-btn" onclick="event.stopPropagation()">🧭 Navigate</a>
+        </div>
       </div>
     `;
 
