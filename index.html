@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Torino Trip — April 2026</title>
-  <meta name="description" content="3-day trip to Torino, Italy — interactive map & itinerary">
+  <title>Italy Trip — April 2026</title>
+  <meta name="description" content="Yerevan → Milan → Torino — interactive trip map & itinerary">
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -14,16 +14,16 @@
   <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Favicon (Italian flag emoji) -->
+  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇹</text></svg>">
 </head>
 <body>
 
   <!-- ===== Header ===== -->
   <header class="header">
-    <h1>Torino 🇮🇹</h1>
-    <p class="subtitle">3 days in the heart of Piemonte</p>
-    <div class="dates">📅 April 19 – 21, 2026</div>
+    <h1>Italy 🇮🇹</h1>
+    <p class="subtitle">Yerevan → Milan → Torino → Home</p>
+    <div class="dates">📅 April 18 – 21, 2026 · 3 travelers</div>
   </header>
 
   <!-- ===== Interactive Map ===== -->
@@ -34,16 +34,24 @@
       <div class="legend-item"><span class="legend-dot activity"></span> Activity</div>
       <div class="legend-item"><span class="legend-dot food"></span> Food</div>
       <div class="legend-item"><span class="legend-dot viewpoint"></span> Viewpoint</div>
+      <div class="legend-item"><span class="legend-dot transport"></span> Transport</div>
     </div>
   </section>
 
-  <!-- ===== Hotel Banner ===== -->
+  <!-- ===== Hotels Banner ===== -->
   <div class="hotel-banner">
-    <div class="hotel-card">
+    <div class="hotel-card milan-hotel" id="hotel-milan-card">
       <div class="hotel-icon">🏨</div>
       <div class="hotel-info">
-        <h3>Your Hotel</h3>
-        <p>Via Cernaia 46, Turin — near Porta Susa station</p>
+        <h3>Hotel Villa Malpensa</h3>
+        <p>Near Malpensa Airport · Night of Apr 18–19</p>
+      </div>
+    </div>
+    <div class="hotel-card torino-hotel" id="hotel-torino-card">
+      <div class="hotel-icon">🏨</div>
+      <div class="hotel-info">
+        <h3>Best Quality Hotel Dock Milano</h3>
+        <p>Via Cernaia 46, Turin · Near Porta Susa · Apr 19–21</p>
       </div>
     </div>
   </div>
@@ -51,20 +59,30 @@
   <!-- ===== Day Tabs ===== -->
   <nav class="tabs-container">
     <div class="tabs">
-      <button class="tab active" data-day="day-1">📅 Day 1 — Apr 19</button>
-      <button class="tab" data-day="day-2">📅 Day 2 — Apr 20</button>
-      <button class="tab" data-day="day-3">📅 Day 3 — Apr 21</button>
+      <button class="tab active" data-day="day-0">✈️ Apr 18</button>
+      <button class="tab" data-day="day-1">📅 Apr 19</button>
+      <button class="tab" data-day="day-2">📅 Apr 20</button>
+      <button class="tab" data-day="day-3">🚌 Apr 21</button>
     </div>
   </nav>
 
   <!-- ===== Timeline ===== -->
   <main class="timeline-section">
 
-    <!-- Day 1 -->
-    <div class="day-panel active" id="day-1">
+    <!-- Day 0 -->
+    <div class="day-panel active" id="day-0">
       <div class="day-header">
-        <h2>Day 1 — Arrival & Juve</h2>
-        <p>Evening arrival, city walk, and live football</p>
+        <h2>Apr 18 — Departure</h2>
+        <p>Late night flight from Yerevan</p>
+      </div>
+      <div class="timeline"></div>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-panel" id="day-1">
+      <div class="day-header">
+        <h2>Apr 19 — Milan → Torino & Juve</h2>
+        <p>Arrive, train to Turin, city walk, live football</p>
       </div>
       <div class="timeline"></div>
     </div>
@@ -72,8 +90,8 @@
     <!-- Day 2 -->
     <div class="day-panel" id="day-2">
       <div class="day-header">
-        <h2>Day 2 — Explore Torino</h2>
-        <p>Stadium tour, iconic landmarks, and sunset views</p>
+        <h2>Apr 20 — Explore Torino</h2>
+        <p>Stadium tour, landmarks, and sunset views</p>
       </div>
       <div class="timeline"></div>
     </div>
@@ -81,8 +99,8 @@
     <!-- Day 3 -->
     <div class="day-panel" id="day-3">
       <div class="day-header">
-        <h2>Day 3 — Arrivederci</h2>
-        <p>Morning coffee and departure</p>
+        <h2>Apr 21 — Arrivederci</h2>
+        <p>Morning walk, FlixBus to Malpensa, fly home</p>
       </div>
       <div class="timeline"></div>
     </div>
@@ -91,44 +109,74 @@
 
   <!-- ===== Budget Estimate ===== -->
   <section class="budget-section">
-    <h2>Budget Estimate</h2>
-    <div class="budget-grid">
-      <div class="budget-card">
-        <div class="budget-icon">🏨</div>
-        <div class="budget-label">Hotel (2 nights)</div>
-        <div class="budget-value">~€150</div>
-      </div>
-      <div class="budget-card">
-        <div class="budget-icon">⚽</div>
-        <div class="budget-label">Match Ticket</div>
-        <div class="budget-value">~€80</div>
-      </div>
-      <div class="budget-card">
-        <div class="budget-icon">🎟️</div>
-        <div class="budget-label">Stadium Tour</div>
-        <div class="budget-value">~€25</div>
-      </div>
-      <div class="budget-card">
-        <div class="budget-icon">🏛️</div>
-        <div class="budget-label">Mole Antonelliana</div>
-        <div class="budget-value">~€15</div>
-      </div>
-      <div class="budget-card">
-        <div class="budget-icon">🍝</div>
-        <div class="budget-label">Food & Drinks</div>
-        <div class="budget-value">~€120</div>
-      </div>
-      <div class="budget-card">
-        <div class="budget-icon">🚌</div>
-        <div class="budget-label">Transport</div>
-        <div class="budget-value">~€30</div>
+    <h2>Budget Estimate <span class="per-person-badge">per person</span></h2>
+
+    <div class="budget-category">
+      <h3>🏨 Accommodation</h3>
+      <div class="budget-grid">
+        <div class="budget-card">
+          <div class="budget-label">Villa Malpensa (1 night)</div>
+          <div class="budget-value">~€107</div>
+        </div>
+        <div class="budget-card">
+          <div class="budget-label">Dock Milano, Turin (2 nights)</div>
+          <div class="budget-value">~€206</div>
+        </div>
       </div>
     </div>
+
+    <div class="budget-category">
+      <h3>🚆 Transport</h3>
+      <div class="budget-grid">
+        <div class="budget-card">
+          <div class="budget-label">Train Milan → Torino</div>
+          <div class="budget-value">~€24</div>
+        </div>
+        <div class="budget-card">
+          <div class="budget-label">FlixBus Turin → Malpensa</div>
+          <div class="budget-value">~€15</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="budget-category">
+      <h3>⚽ Activities</h3>
+      <div class="budget-grid">
+        <div class="budget-card">
+          <div class="budget-label">Juventus Match Ticket</div>
+          <div class="budget-value">€90</div>
+        </div>
+        <div class="budget-card">
+          <div class="budget-label">Allianz Stadium Tour</div>
+          <div class="budget-value">€40</div>
+        </div>
+        <div class="budget-card">
+          <div class="budget-label">Mole Antonelliana</div>
+          <div class="budget-value">~€15</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="budget-category">
+      <h3>🍝 Food & Drinks</h3>
+      <div class="budget-grid">
+        <div class="budget-card">
+          <div class="budget-label">~3 days meals</div>
+          <div class="budget-value">~€100</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="budget-total">
+      <span>Estimated Total (per person)</span>
+      <span class="total-value">~€597</span>
+    </div>
+    <p class="budget-note">* Excludes flights. All estimates are approximate and per person for 3 travelers.</p>
   </section>
 
   <!-- ===== Footer ===== -->
   <footer class="footer">
-    Made with ☕ for Torino 2026
+    Made with ☕ for Italy 2026 · Hayk, Hovhannes & Seegey
   </footer>
 
   <!-- Leaflet JS -->
