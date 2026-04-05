@@ -118,9 +118,9 @@ const days = [
     items: [
       {
         time: '22:45',
-        title: 'Depart Yerevan',
+        title: 'Մեկնում Երևանից',
         location: locations.malpensaAirport,
-        desc: 'Late night flight from Zvartnots International Airport to Milan Malpensa.',
+        desc: 'Գիշերային թիռիչ Զվարթնոցից դեպի Միլան Մալպենսա',
         type: 'transport'
       }
     ]
