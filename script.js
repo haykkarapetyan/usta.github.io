@@ -22,6 +22,20 @@ const locations = {
     emoji: '🚆',
     desc: 'Main train station — train to Torino'
   },
+  duomoMilano: {
+    name: 'Duomo di Milano',
+    coords: [45.4641, 9.1919],
+    type: 'activity',
+    emoji: '⛪',
+    desc: 'Milan\'s iconic cathedral — stunning Gothic architecture'
+  },
+  galleriaMilano: {
+    name: 'Galleria Vittorio Emanuele II',
+    coords: [45.4659, 9.1900],
+    type: 'activity',
+    emoji: '🏛️',
+    desc: 'Historic shopping gallery next to Duomo'
+  },
 
   // Turin
   hotelDock: {
@@ -65,6 +79,20 @@ const locations = {
     type: 'viewpoint',
     emoji: '🌅',
     desc: 'Best sunset viewpoint in Turin'
+  },
+  piazzaSanCarlo: {
+    name: 'Piazza San Carlo',
+    coords: [45.0679, 7.6833],
+    type: 'activity',
+    emoji: '☕',
+    desc: 'Turin\'s "living room" — elegant cafes and architecture'
+  },
+  palazzoReale: {
+    name: 'Palazzo Reale',
+    coords: [45.0730, 7.6865],
+    type: 'activity',
+    emoji: '👑',
+    desc: 'Royal Palace of Turin — UNESCO World Heritage'
   },
   cityCenter: {
     name: 'Piazza Castello (City Center)',
@@ -112,14 +140,42 @@ const days = [
         time: '02:00',
         title: 'Check in — Villa Malpensa',
         location: locations.villaMalpensa,
-        desc: 'Rest at Hotel Villa Malpensa near the airport. Sleep in and recharge.',
+        desc: 'Rest at Hotel Villa Malpensa near the airport. Short sleep before exploring Milan.',
         type: 'hotel'
       },
       {
-        time: '~14:00',
-        title: 'Transfer to Milano Centrale',
+        time: '08:00',
+        title: 'Head to Milan City Center',
         location: locations.milanoCentrale,
-        desc: 'Head to Milano Centrale station for the train to Torino.',
+        desc: 'Early start! Take the Malpensa Express or transfer to the city center.',
+        type: 'transport'
+      },
+      {
+        time: '09:30',
+        title: 'Duomo di Milano',
+        location: locations.duomoMilano,
+        desc: 'Visit Milan\'s iconic cathedral. Walk around the piazza and admire the Gothic facade.',
+        type: 'activity'
+      },
+      {
+        time: '10:30',
+        title: 'Galleria Vittorio Emanuele II',
+        location: locations.galleriaMilano,
+        desc: 'Stroll through Italy\'s oldest shopping gallery. Beautiful mosaics and luxury shops.',
+        type: 'activity'
+      },
+      {
+        time: '12:00',
+        title: 'Lunch in Milan',
+        location: locations.duomoMilano,
+        desc: 'Grab lunch near Duomo. Try risotto alla milanese or cotoletta.',
+        type: 'food'
+      },
+      {
+        time: '~14:30',
+        title: 'Head to Milano Centrale',
+        location: locations.milanoCentrale,
+        desc: 'Metro or walk to Milano Centrale station for the train to Torino.',
         type: 'transport'
       },
       {
@@ -163,6 +219,27 @@ const days = [
     id: 'day2',
     panelId: 'day-2',
     items: [
+      {
+        time: '08:30',
+        title: 'Breakfast & Piazza San Carlo',
+        location: locations.piazzaSanCarlo,
+        desc: 'Morning coffee at one of Turin\'s most elegant squares. Try a bicerin — Turin\'s signature drink.',
+        type: 'food'
+      },
+      {
+        time: '09:30',
+        title: 'Piazza Castello & Palazzo Reale',
+        location: locations.palazzoReale,
+        desc: 'Walk through the heart of Turin. See the Royal Palace and the grand Piazza Castello.',
+        type: 'activity'
+      },
+      {
+        time: '10:30',
+        title: 'Head to Allianz Stadium',
+        location: locations.allianz,
+        desc: 'Take the metro or bus to the stadium area. Arrive early to soak in the atmosphere.',
+        type: 'transport'
+      },
       {
         time: '11:45',
         title: 'Juventus Stadium Tour',
@@ -323,6 +400,9 @@ const routeLines = {
     locations.malpensaAirport.coords,
     locations.villaMalpensa.coords,
     locations.milanoCentrale.coords,
+    locations.duomoMilano.coords,
+    locations.galleriaMilano.coords,
+    locations.milanoCentrale.coords,
     locations.hotelDock.coords,
     locations.piazzaStatuto.coords,
     locations.viaGaribaldi.coords,
@@ -330,6 +410,8 @@ const routeLines = {
   ], { color: '#0071e3', weight: 2.5, opacity: 0.5, dashArray: '8,8' }),
 
   'day-2': L.polyline([
+    locations.piazzaSanCarlo.coords,
+    locations.palazzoReale.coords,
     locations.allianz.coords,
     locations.cityCenter.coords,
     locations.mole.coords,
@@ -351,13 +433,15 @@ const dayBounds = {
   'day-1': [
     locations.malpensaAirport.coords,
     locations.villaMalpensa.coords,
+    locations.duomoMilano.coords,
     locations.milanoCentrale.coords,
     locations.hotelDock.coords,
     locations.allianz.coords
   ],
   'day-2': [
+    locations.piazzaSanCarlo.coords,
+    locations.palazzoReale.coords,
     locations.allianz.coords,
-    locations.cityCenter.coords,
     locations.mole.coords,
     locations.monteCappuccini.coords
   ],
