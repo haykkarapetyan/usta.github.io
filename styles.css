@@ -481,6 +481,18 @@ body {
   text-align: center;
 }
 
+.price-disclaimer {
+  background: #fff2f2;
+  border: 2px solid #ff3b30;
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  color: #ff3b30;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 /* ===== Footer ===== */
 .footer {
   text-align: center;
