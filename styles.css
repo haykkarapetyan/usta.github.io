@@ -1,0 +1,520 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --accent: #0071e3;
+  --accent-light: #e8f2ff;
+  --hotel: #ff6b35;
+  --activity: #0071e3;
+  --food: #34c759;
+  --viewpoint: #af52de;
+  --border: #e5e5ea;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Header ===== */
+.header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: white;
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 70%, rgba(0,113,227,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+  position: relative;
+}
+
+.header .subtitle {
+  font-size: 1rem;
+  opacity: 0.75;
+  font-weight: 400;
+  position: relative;
+}
+
+.header .dates {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+/* ===== Map ===== */
+.map-section {
+  position: relative;
+}
+
+#map {
+  width: 100%;
+  height: 45vh;
+  min-height: 300px;
+  z-index: 1;
+}
+
+.map-legend {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot.hotel { background: var(--hotel); }
+.legend-dot.activity { background: var(--activity); }
+.legend-dot.food { background: var(--food); }
+.legend-dot.viewpoint { background: var(--viewpoint); }
+
+/* ===== Day Tabs ===== */
+.tabs-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1rem;
+}
+
+.tabs {
+  display: flex;
+  max-width: 700px;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  flex: 1;
+  min-width: max-content;
+  padding: 0.9rem 1.2rem;
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2.5px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+.tab.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tab.active::after {
+  width: 60%;
+}
+
+/* ===== Timeline ===== */
+.timeline-section {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.day-panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.day-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.day-header {
+  margin-bottom: 1.5rem;
+}
+
+.day-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.day-header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+/* Timeline line */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+  border-radius: 1px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.timeline-item:hover {
+  transform: translateX(4px);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 1.1rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  background: var(--surface);
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.timeline-item[data-type="hotel"]::before { border-color: var(--hotel); }
+.timeline-item[data-type="activity"]::before { border-color: var(--activity); }
+.timeline-item[data-type="food"]::before { border-color: var(--food); }
+.timeline-item[data-type="viewpoint"]::before { border-color: var(--viewpoint); }
+
+.timeline-item.active::before {
+  transform: scale(1.3);
+}
+
+.timeline-item.active[data-type="hotel"]::before { background: var(--hotel); }
+.timeline-item.active[data-type="activity"]::before { background: var(--activity); }
+.timeline-item.active[data-type="food"]::before { background: var(--food); }
+.timeline-item.active[data-type="viewpoint"]::before { background: var(--viewpoint); }
+
+.timeline-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+
+.timeline-item.active .timeline-card {
+  box-shadow: var(--shadow-lg);
+}
+
+.timeline-card .time {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.timeline-card .title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.timeline-card .location {
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.timeline-card .desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.timeline-card .distance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: var(--bg);
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+}
+
+/* ===== Hotel Card ===== */
+.hotel-banner {
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  padding: 0 1rem;
+}
+
+.hotel-card {
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  color: white;
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 20px rgba(255,107,53,0.3);
+}
+
+.hotel-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.hotel-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.hotel-info p {
+  font-size: 0.82rem;
+  opacity: 0.9;
+}
+
+/* ===== Budget Section ===== */
+.budget-section {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem 3rem;
+}
+
+.budget-section h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.budget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.budget-card {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.budget-card .budget-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.budget-card .budget-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.15rem;
+}
+
+.budget-card .budget-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== Custom Leaflet Markers ===== */
+.custom-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  border: 3px solid white;
+  transition: transform 0.2s;
+}
+
+.custom-marker.hotel { background: var(--hotel); }
+.custom-marker.activity { background: var(--activity); }
+.custom-marker.food { background: var(--food); }
+.custom-marker.viewpoint { background: var(--viewpoint); }
+
+.custom-marker.highlighted {
+  transform: scale(1.35);
+  z-index: 1000 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}
+
+/* Leaflet popup styling */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-lg) !important;
+  font-family: var(--font) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0.8rem 1rem !important;
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-content strong {
+  font-size: 0.95rem;
+}
+
+/* ===== Route lines ===== */
+.leaflet-overlay-pane path {
+  stroke-dasharray: 8, 8;
+}
+
+/* ===== Responsive ===== */
+@media (min-width: 768px) {
+  .header {
+    padding: 4rem 2rem 3rem;
+  }
+
+  .header h1 {
+    font-size: 3rem;
+  }
+
+  .header .subtitle {
+    font-size: 1.15rem;
+  }
+
+  #map {
+    height: 50vh;
+  }
+
+  .timeline-section,
+  .hotel-banner,
+  .budget-section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .timeline-card {
+    padding: 1.2rem 1.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .header h1 {
+    font-size: 1.7rem;
+  }
+
+  .map-legend {
+    gap: 0.6rem;
+    font-size: 0.65rem;
+  }
+
+  .tab {
+    padding: 0.8rem 0.9rem;
+    font-size: 0.8rem;
+  }
+}
